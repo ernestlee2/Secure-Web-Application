@@ -1,0 +1,70 @@
+﻿@page "{searchString?}"
+@model shoppingcomdraft5.Pages.Listings.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<form>
+    <p>
+        <select asp-for="ListingCategory" asp-items="Model.Category">
+            <option value="">All</option>
+        </select>
+        Title: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Listing[0].ListingName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Listing[0].ListingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Listing[0].Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Listing[0].Price)
+            </th>
+               <th>
+                @Html.DisplayNameFor(model => model.Listing[0].Condition)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Listing) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListingName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Condition)
+            </td>
+
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ListingID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ListingID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ListingID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
